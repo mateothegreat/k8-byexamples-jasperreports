@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jasper-reports
+  labels:
+    app: jasper-reports
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: jasper-reports
+        tier: mysql
+    spec:
+      containers:
+      - image: zoomdata/quickstart:latest
+        name: jasper-reports
+        ports:
+        - containerPort: 8080
+          name: jasper-reports
+        env:
+          - name: JASPERREPORTS_USERNAME
+            value: $JASPERREPORTS_USERNAME
+          - name: JASPERREPORTS_PASSWORD
+            value: $JASPERREPORTS_PASSWORD
+          - name: JASPERREPORTS_EMAIL
+            value: $JASPERREPORTS_EMAIL
+          - name: MARIADB_HOST
+            value: $MARIADB_HOST
+          - name: MARIADB_PORT_NUMBER
+            value: $MARIADB_PORT_NUMBER
+          - name: JASPERREPORTS_DATABASE_NAME
+            value: $JASPERREPORTS_DATABASE_NAME
+          - name: JASPERREPORTS_DATABASE_USER
+            value: $JASPERREPORTS_DATABASE_USER
+          - name: JASPERREPORTS_DATABASE_PASSWORD
+            value: $JASPERREPORTS_DATABASE_PASSWORD
+          - name: JASPERREPORTS_DATABASE_PASSWORD
+            value: $JASPERREPORTS_DATABASE_NAME
